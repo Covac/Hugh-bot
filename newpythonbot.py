@@ -67,16 +67,17 @@ class MyClient(discord.Client):
         if message.content.startswith('!!play'):
             link = message.content.strip('!!play')
             if (not('http' in link) or not('www.' in link) or not('.com' in link)):
-                try:#maybe handle it a different way ************FIX TO BE CONFIRMED****************************
+                try:#LAZY
                     link = await YTS(link)#maybe test it without await after lag fix
                 except:
                     print("Error trying to find a song... Probably a 'index out of range'")
                     print("Trying to prevent it first")
                     try:
-                        link = await YTS(link)#if it fails do the expensive one
+                        link = await YTS(link, False)#expensive search
                     except:
                         print("Failed to prevent it")
                         await message.channel.send('Error occured while trying to find the song! Try adding it with a link or try again.')
+                        link = None#to prevent possible shitstorm :)
 
             if not (guild in self.guildQ):
                 self.guildQ[guild] = []
