@@ -90,24 +90,24 @@ class MyClient(discord.Client):
                     print(self.guildQ)
                     return None
             
-            async with message.channel.typing():
-                queuepointer = 0 ###plus 1
-                self.guildVCs[guild] = await message.author.voice.channel.connect()
-                while True:
-                    
-                    player = await YTDLSource.from_url(self.guildQ[guild][queuepointer])
-                    await message.channel.send('Now playing: {}'.format(player.title))#add duration
-                    self.guildVCs[guild].play(player, after=lambda e: print('Player error: %s' % e) if e else None)
-                    
-                    while self.guildVCs[guild].is_playing():#might be expensive but makes skip work
-                        await asyncio.sleep(2)
-                        
-                    queuepointer += 1
-                    if len(self.guildQ[guild]) <= queuepointer:
-                        break
-                        
-                await self.guildVCs[guild].disconnect()
-                del self.guildQ[guild]
+                async with message.channel.typing():
+                    queuepointer = 0 ###plus 1
+                    self.guildVCs[guild] = await message.author.voice.channel.connect()
+                    while True:
+
+                        player = await YTDLSource.from_url(self.guildQ[guild][queuepointer])
+                        await message.channel.send('Now playing: {}'.format(player.title))#add duration
+                        self.guildVCs[guild].play(player, after=lambda e: print('Player error: %s' % e) if e else None)
+
+                        while self.guildVCs[guild].is_playing():#might be expensive but makes skip work
+                            await asyncio.sleep(2)
+
+                        queuepointer += 1
+                        if len(self.guildQ[guild]) <= queuepointer:
+                            break
+
+                    await self.guildVCs[guild].disconnect()
+                    del self.guildQ[guild]
 
         if message.content.startswith('!!skip'):
             if self.guildVCs[guild].is_playing():
