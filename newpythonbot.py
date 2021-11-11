@@ -2,6 +2,7 @@ import discord
 import youtube_dl
 import asyncio
 from YoutubeRFR import YTS
+import os
 
 def deleteSongs():
     import os
