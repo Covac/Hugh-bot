@@ -79,7 +79,7 @@ class MyClient(discord.Client):
                         await message.channel.send('Error occured while trying to find the song! Try adding it with a link or try again.')
                         link = None#to prevent possible shitstorm :)
                         
-            if link not None:
+            if link != None:
                 if not (guild in self.guildQ):
                     self.guildQ[guild] = []
                     self.guildQ[guild].append(link)
