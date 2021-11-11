@@ -78,16 +78,17 @@ class MyClient(discord.Client):
                         print("Failed to prevent it")
                         await message.channel.send('Error occured while trying to find the song! Try adding it with a link or try again.')
                         link = None#to prevent possible shitstorm :)
+                        
+            if link not None:
+                if not (guild in self.guildQ):
+                    self.guildQ[guild] = []
+                    self.guildQ[guild].append(link)
+                    print(self.guildQ)
 
-            if not (guild in self.guildQ):
-                self.guildQ[guild] = []
-                self.guildQ[guild].append(link)
-                print(self.guildQ)
-                
-            elif guild in self.guildQ:
-                self.guildQ[guild].append(link)
-                print(self.guildQ)
-                return None
+                elif guild in self.guildQ:
+                    self.guildQ[guild].append(link)
+                    print(self.guildQ)
+                    return None
             
             async with message.channel.typing():
                 queuepointer = 0 ###plus 1
