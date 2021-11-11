@@ -1,5 +1,3 @@
 discord
 youtube-dl
-asyncio
-urllib
 BeautifulSoup
