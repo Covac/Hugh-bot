@@ -1,3 +1,4 @@
 discord
 youtube-dl
 beautifulsoup4
+PyNaCl
