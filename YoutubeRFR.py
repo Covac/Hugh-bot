@@ -13,10 +13,9 @@ async def YTS(textToSearch):
     html = response.read()
     #await asyncio.sleep(0.1)
     soup = BeautifulSoup(html, "html.parser")
-    print(soup)
-    links = soup.find_all('script',text=re.compile('var ytInitialData ='))
+    links = soup.find_all('script',text=re.compile('var ytInitialData ='))#find correct script tag
     data = re.search(r'ytInitialData = ({.*?});',
-                      str(links), flags=re.DOTALL | re.MULTILINE).group(1)
+                      str(links), flags=re.DOTALL | re.MULTILINE).group(1)#extract JSON
     data = json.loads(data)
     url = data["contents"]["twoColumnSearchResultsRenderer"]["primaryContents"]["sectionListRenderer"]["contents"][0]["itemSectionRenderer"]["contents"][0]["videoRenderer"]["navigationEndpoint"]["commandMetadata"]["webCommandMetadata"]["url"]
     return 'https://www.youtube.com' + url
