@@ -64,8 +64,11 @@ class MyClient(discord.Client):
             print('Message from {0.author} on {0.guild}: {0.content}'.format(message))
             #guildid = message.guild.id
             
-        if message.content.startswith('!!play'):
-            link = message.content.strip('!!play')
+        if message.content.startswith('!help'):
+            await message.channel.send('!play <LINK> play or queue it OR !play <TEXT> returns first result from YT\n!skip skips :)')
+            
+        if message.content.startswith('!play'):
+            link = message.content.strip('!play')
             if (not('http' in link) or not('www.' in link) or not('.com' in link)):
                 try:#LAZY
                     link = await YTS(link)#maybe test it without await after lag fix
@@ -109,7 +112,7 @@ class MyClient(discord.Client):
                     await self.guildVCs[guild].disconnect()
                     del self.guildQ[guild]
 
-        if message.content.startswith('!!skip'):
+        if message.content.startswith('!skip'):
             if self.guildVCs[guild].is_playing():
                 self.guildVCs[guild].stop()
                 
@@ -138,6 +141,5 @@ ffmpeg_options = {
 }
 
 ytdl = youtube_dl.YoutubeDL(ytdl_format_options)
-TOKEN = os.environ['CLIENT_TOKEN']
 client = MyClient()
-client.run(TOKEN)
+client.run(os.environ['CLIENT_TOKEN'])
