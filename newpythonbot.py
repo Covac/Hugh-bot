@@ -79,7 +79,7 @@ class MyClient(discord.Client):
                     print("Error trying to find a song... Probably a 'index out of range'")
                     print("Trying to prevent it first")
                     try:
-                        link = await YTS(link, False)#expensive search
+                        link = await YTS(link, True)#expensive search
                     except:
                         print("Failed to prevent it")
                         await message.channel.send('Error occured while trying to find the song! Try adding it with a link or try again.')
