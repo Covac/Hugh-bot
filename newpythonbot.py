@@ -64,6 +64,9 @@ class MyClient(discord.Client):
             print('Message from {0.author} on {0.guild}: {0.content}'.format(message))
             #guildid = message.guild.id
             
+        if message.content.startswith('!!help'):
+            await message.channel.send('!!play <LINK> play or queue it OR !!play <TEXT> returns first result from YT\n!!skip skips :)')
+            
         if message.content.startswith('!!play'):
             link = message.content.strip('!!play')
             if (not('http' in link) or not('www.' in link) or not('.com' in link)):
@@ -138,6 +141,5 @@ ffmpeg_options = {
 }
 
 ytdl = youtube_dl.YoutubeDL(ytdl_format_options)
-TOKEN = os.environ['CLIENT_TOKEN']
 client = MyClient()
-client.run(TOKEN)
+client.run(os.environ['CLIENT_TOKEN'])
