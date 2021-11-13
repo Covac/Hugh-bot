@@ -64,6 +64,8 @@ class MyClient(discord.Client):
         if not (message.author.bot) :
             print('Message from {0.author} on {0.guild}: {0.content}'.format(message))
             #guildid = message.guild.id
+        else:
+            return None
             
         if message.content.startswith('!help'):
             await message.channel.send('!play <LINK> play or queue it OR !play <TEXT> returns first result from YT\n!skip skips :)')
