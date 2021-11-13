@@ -6,7 +6,7 @@ import json
 import re
 from time import time
 
-async def YTS(textToSearch):
+async def YTS(textToSearch,alternative=False):
     start = time()
     textToSearch = str(textToSearch)
     query = urllib.parse.quote(textToSearch)
@@ -19,6 +19,6 @@ async def YTS(textToSearch):
     data = re.search(r'ytInitialData = ({.*?});',
                       str(links), flags=re.DOTALL | re.MULTILINE).group(1)#extract JSON
     data = json.loads(data)
-    url = data["contents"]["twoColumnSearchResultsRenderer"]["primaryContents"]["sectionListRenderer"]["contents"][0]["itemSectionRenderer"]["contents"][0]["videoRenderer"]["navigationEndpoint"]["commandMetadata"]["webCommandMetadata"]["url"]
+    url = data["contents"]["twoColumnSearchResultsRenderer"]["primaryContents"]["sectionListRenderer"]["contents"][0]["itemSectionRenderer"]["contents"][0+int(alternative)]["videoRenderer"]["navigationEndpoint"]["commandMetadata"]["webCommandMetadata"]["url"]
     print("Time spent searching: {0} seconds".format(round(time()-start),3))
     return 'https://www.youtube.com' + url
