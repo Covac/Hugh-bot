@@ -52,6 +52,7 @@ class MyClient(discord.Client):
         self.guildVCs = {}#Enables skipping and pausing of audio
     
     async def on_ready(self):
+        await self.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name='music !help'))#apparently this is not recommended to do here       
         deleteSongs()
         print(discord.opus.is_loaded())
         print('Logged on as {0}!'.format(self.user))
