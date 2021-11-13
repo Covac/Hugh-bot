@@ -4,8 +4,10 @@ from bs4 import BeautifulSoup
 import asyncio
 import json
 import re
+from time import time
 
 async def YTS(textToSearch):
+    start = time()
     textToSearch = str(textToSearch)
     query = urllib.parse.quote(textToSearch)
     url = "https://www.youtube.com/results?search_query=" + query
@@ -18,4 +20,5 @@ async def YTS(textToSearch):
                       str(links), flags=re.DOTALL | re.MULTILINE).group(1)#extract JSON
     data = json.loads(data)
     url = data["contents"]["twoColumnSearchResultsRenderer"]["primaryContents"]["sectionListRenderer"]["contents"][0]["itemSectionRenderer"]["contents"][0]["videoRenderer"]["navigationEndpoint"]["commandMetadata"]["webCommandMetadata"]["url"]
+    print("Time spent searching {0}".format(round(time()-start),3))
     return 'https://www.youtube.com' + url
