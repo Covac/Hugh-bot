@@ -5,6 +5,7 @@ from YoutubeRFR import YTS
 import os
 
 #=========GPT-2===========
+import json
 import fire
 import numpy as np
 import tensorflow as tf
