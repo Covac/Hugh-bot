@@ -162,16 +162,16 @@ ffmpeg_options = {
 }
 
 
-model_name='124M',
-    seed=None,
-    nsamples=1,
-    batch_size=1,
-    length=None,
-    temperature=1,
-    top_k=0,
-    top_p=1,
-    models_dir='models',
-):
+model_name='Pretrained'
+seed=None
+nsamples=1
+batch_size=1
+length=None
+temperature=0.3
+top_k=40
+top_p=1
+models_dir='models'
+
     """
     Interactively run the model
     :model_name=124M : String, which model to use
