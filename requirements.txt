@@ -1,0 +1,6 @@
+discord
+yt-dlp
+beautifulsoup4
+pynacl
+openai
+requests
